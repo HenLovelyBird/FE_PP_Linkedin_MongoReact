@@ -23,6 +23,7 @@ const userData = props.userData
     return ( 
         <>
             <div style={divStyle}></div>
+            <h1>{JSON.stringify(props.userData)}</h1>
             {userData.image ? <img style={userImgStyle} src={userData.image} alt=""/> : <img style={userImgStyle} src="https://www.legalniewsieci.pl/!data/newsy/news_1982.jpg" /> }
             <div className="user-info-current-profile-header">
                 <h4>{userData.name} {userData.surname}</h4>
