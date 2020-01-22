@@ -69,12 +69,12 @@ class CurrentUserPage extends React.Component {
         let username = "user16"
         let password = "c9WEUxMS294hN6fF"
         let token = btoa(username + ":" + password)
-        let response = await fetch("https://strive-school-testing-apis.herokuapp.com/api/profile/" + this.props.match.params.userId + "/experiences", {
+        let response = await fetch("http://localhost:7000/experiences/profile/" + this.props.match.params.username ,  {
             method: "GET",
-            headers: {
-                "Authorization": "Basic " + token
+            // headers: {
+            //     "Authorization": "Basic " + token
       
-            }
+            // }
         })
         let prof = await response.json()
 
@@ -93,11 +93,11 @@ class CurrentUserPage extends React.Component {
         let username = "user16"
         let password = "c9WEUxMS294hN6fF"
         let token = btoa(username + ":" + password)
-        let response = await fetch("https://strive-school-testing-apis.herokuapp.com/api/profile", {
+        let response = await fetch("http://localhost:7000/profile/", {
             method: "GET",
-            headers: {
-                "authorization" : "Basic " + token
-            }
+            // headers: {
+            //     "authorization" : "Basic " + token
+            // }
         })
         let usersData = await response.json()
         this.setState({
@@ -113,7 +113,8 @@ class CurrentUserPage extends React.Component {
         let username = "user16"
         let password = "c9WEUxMS294hN6fF"
         let token = btoa(username + ":" + password)
-        let response = await fetch("https://strive-school-testing-apis.herokuapp.com/api/profile/" + this.props.match.params.userId, {
+        const user = "heni"// this.props.match.params.userId
+        let response = await fetch("http://localhost:7000/profile/" + user , {
             method: "GET",
             headers: {
                 "Authorization": "Basic " + token
