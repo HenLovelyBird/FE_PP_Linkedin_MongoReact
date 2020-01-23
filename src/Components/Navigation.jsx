@@ -37,23 +37,23 @@ class Navigation extends React.Component {
       }
    }
 
-   handleSearch = async(ev) => {
-     let username = "user16"
-     let password = "c9WEUxMS294hN6fF"
-     let token = btoa(username + ":" + password)
-     if(ev.target.value.length > 4){
-      let response = await fetch("https://striveschool.herokuapp.com/api/profile/" + ev.target.value, {
-         method: "GET",
-         headers: {
-             "authorization" : "Basic " + token
-         }
-      })
-      let usersData = await response.json()
-      this.setState({
-            srch: usersData
-      })
-     }
-   }
+   // handleSearch = async(ev) => {
+   //   let username = "user16"
+   //   let password = "c9WEUxMS294hN6fF"
+   //   let token = btoa(username + ":" + password)
+   //   if(ev.target.value.length > 4){
+   //    let response = await fetch("http://localhost:7000/profiles" + ev.target.value, {
+   //       method: "GET",
+   //       headers: {
+   //           "authorization" : "Basic " + token
+   //       }
+   //    })
+   //    let usersData = await response.json()
+   //    this.setState({
+   //          srch: usersData
+   //    })
+   //   }
+   // }
     render() {
       return (
          <Navbar className="nav-top" expand="lg">

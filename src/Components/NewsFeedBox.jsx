@@ -16,11 +16,9 @@ class NewsFeedBox extends Component {
         let username = "user21";
         let password = "2ruxa4MRJdUgg6cz";
         let token = btoa(username + ":" + password);
-        let response = await fetch("https://striveschool.herokuapp.com/api/posts/" + this.props.newsData._id,{
+        let response = await fetch("http://localhost:7000/posts/" + this.props.newsData._id,{
               method: "DELETE",
-              headers: {
-                  "authorization" : "Basic " + token,
-              }
+            
           }) 
           console.log(response)
           this.setState({isDelete: true})

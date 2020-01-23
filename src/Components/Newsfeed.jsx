@@ -57,6 +57,7 @@ class Newsfeed extends React.Component {
     componentDidMount = async () => {
        
         let response = await fetch("http://localhost:7000/posts")
+        console.log(response)
         let news = await response.json()
         console.log(news);
         this.setState({

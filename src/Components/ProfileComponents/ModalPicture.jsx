@@ -49,18 +49,12 @@ class ModalPicture extends React.Component {
     }
 
     uploadPucture=async()=> {
-        let username = "user16";
-        let password = "c9WEUxMS294hN6fF";
-        let token = btoa(username + ":" + password);
         var formData = new FormData();
         console.log(this.state.file)
         formData.append("profile", this.state.file)
         try{
-            let response = await fetch("https://striveschool.herokuapp.com/api/profile/user16/picture",{
+            let response = await fetch("http://localhost:7000/profiles/:username/picture",{
                 method: "POST",
-                headers: {
-                    "authorization": "Basic " + token,
-                },
                 body: formData
                 
             })

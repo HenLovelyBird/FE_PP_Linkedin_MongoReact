@@ -19,18 +19,11 @@ class ExperienceUpdateForm extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    let username = "user16";
-    let password = "c9WEUxMS294hN6fF";
-    let token = btoa(username + ":" + password);
     let response = await fetch(
-      "https://striveschool.herokuapp.com/api/profile/user16/experiences/",
+      "http://localhost:7000//profiles/experience/:username",
       {
         method: "POST",
-        body: JSON.stringify(this.state.formData),
-        headers: {
-          Authorization: "Basic " + token,
-          "Content-Type": "application/json"
-        }
+        body: JSON.stringify(this.state.formData)
       } 
     );
     this.setState({closeModal: true})

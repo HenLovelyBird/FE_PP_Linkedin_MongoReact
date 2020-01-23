@@ -11,7 +11,8 @@ let loaderStyle = {
 class ProfilesDropDown extends React.Component {
     state = { 
         loading: true,
-        users: []
+        users: [],
+        profiles: {}
      }
     render() {
         return ( 
@@ -33,19 +34,11 @@ class ProfilesDropDown extends React.Component {
         this.setState({
             loading: true
         })
-        let username = "user16"
-        let password = "c9WEUxMS294hN6fF"
-        let token = btoa(username + ":" + password)
-        let response = await fetch("https://strive-school-testing-apis.herokuapp.com/api/profile", {
-            method: "GET",
-            headers: {
-                "authorization" : "Basic " + token
-            }
-        })
+        let response = await fetch("http://localhost:7000/profiles")
         let usersData = await response.json()
         this.setState({
             loading: false,
-            users: usersData
+            profiles: ProfilesDropDown
 
         })
     }

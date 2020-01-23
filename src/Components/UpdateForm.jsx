@@ -20,16 +20,9 @@ class UpdateForm extends React.Component {
 
     handleSubmit = async(event) => {
       event.preventDefault()
-      let username = "user16"
-      let password = "c9WEUxMS294hN6fF"
-      let token = btoa(username + ":" + password)
-      let response = await fetch("https://striveschool.herokuapp.com/api/profiles/" + username, {
+      let response = await fetch("http://localhost:7000/profiles/:id", {
           method: "PUT",
-          body: JSON.stringify(this.state.profile),
-          headers: {
-              "Authorization": "Basic " + token,
-              "Content-Type" : "application/json"
-          }
+          body: JSON.stringify(this.state.profile)
       })
       return response
     }
