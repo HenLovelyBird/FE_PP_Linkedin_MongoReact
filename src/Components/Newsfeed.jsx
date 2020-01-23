@@ -55,19 +55,12 @@ class Newsfeed extends React.Component {
         }
     }
     componentDidMount = async () => {
-        let username = "user21"
-        let password = "2ruxa4MRJdUgg6cz"
-        let token = btoa(username + ":" + password)
-        let response = await fetch("https://striveschool.herokuapp.com/api/posts/", {
-            method: "GET",
-            headers: {
-                "Authorization": "Basic " + token
-            }
-        })
+       
+        let response = await fetch("http://localhost:7000/posts")
         let news = await response.json()
         console.log(news);
         this.setState({
-            Newsfeed: news.reverse()
+            Newsfeed: news.posts
         })
     };
     render() {

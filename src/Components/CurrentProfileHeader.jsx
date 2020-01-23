@@ -26,7 +26,7 @@ const userData = props.userData
             <h1>{JSON.stringify(props.userData)}</h1>
             {userData.image ? <img style={userImgStyle} src={userData.image} alt=""/> : <img style={userImgStyle} src="https://www.legalniewsieci.pl/!data/newsy/news_1982.jpg" /> }
             <div className="user-info-current-profile-header">
-                <h4>{userData.name} {userData.surname}</h4>
+                <h4>{userData.firstname} {userData.surname}</h4>
                 <p style={{margin: "5px 0px"}}>{userData.title}</p>
                 <p style={{margin: "5px 0px"}}>{userData.area}</p>
             </div>
