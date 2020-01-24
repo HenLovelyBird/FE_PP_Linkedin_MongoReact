@@ -139,6 +139,12 @@ class Navigation extends React.Component {
                      <NavLink href="#">Learning</NavLink>
                   </div>
                </NavItem>
+               <NavItem>
+                  <div className="nav-item-div">
+                     <FontAwesomeIcon className="nav-icon" icon={faHome}/>
+                     <NavLink onClick={this.props.logout}>Logout</NavLink>
+                  </div>
+               </NavItem>
                </Collapse>
             </Nav>
          </Navbar>

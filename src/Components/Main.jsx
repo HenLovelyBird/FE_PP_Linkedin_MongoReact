@@ -8,10 +8,12 @@ import Newsfeed from './Newsfeed';
 
 
 class Main extends React.Component {
+
+   
     render() {
         return (
             <Router>
-            <Navigation />
+            <Navigation logout={this.props.logout}/>
             
             <Container className="parentcontainer">
                 <Switch>
