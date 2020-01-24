@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Toast, ToastHeader, ToastBody, Row } from 'reactstrap';
-import { FaPencilAlt, FaCameraRetro } from "react-icons/fa";
+import { FaPencilAlt, FaCameraRetro, FaThumbsUp } from "react-icons/fa";
 import NewsModel from './NewsModel';
 import NewsFeedBox from './NewsFeedBox';
 import NewsPictureModel from './NewsPictureModel';
@@ -21,10 +21,12 @@ let pencil = {
 
 class Newsfeed extends React.Component {
     state = {
-        newsfeed: '',
+        Newsfeed: [],
         modalOpen: false,
         modalOpenPicture: false,
-        dropdownOpen: false
+        dropdownOpen: false,
+        
+
     }
 
     setModal = (event) => {
@@ -55,19 +57,14 @@ class Newsfeed extends React.Component {
         }
     }
     componentDidMount = async () => {
-        let username = "user21"
-        let password = "2ruxa4MRJdUgg6cz"
-        let token = btoa(username + ":" + password)
-        let response = await fetch("https://striveschool.herokuapp.com/api/posts/", {
-            method: "GET",
-            headers: {
-                "Authorization": "Basic " + token
-            }
-        })
+         let username = "user21"
+         let password = "2ruxa4MRJdUgg6cz"
+         let token = btoa(username + ":" + password)
+        let response = await fetch("http://localhost:7000/posts/")
         let news = await response.json()
         console.log(news);
         this.setState({
-            Newsfeed: news.reverse()
+            Newsfeed: news.posts.reverse()
         })
     };
     render() {
@@ -75,6 +72,14 @@ class Newsfeed extends React.Component {
         return (
             <>
                 <Container flex id="newsfeed-toast">
+            
+        
+           
+
+                
+
+
+
                     <div className="p-4 bg-info my-4 fluid">
                         <div>{this.state.modalOpen && <NewsModel
                             setmodal={this.setModal} open={this.state.modalOpen} />}
@@ -98,6 +103,7 @@ class Newsfeed extends React.Component {
                     <Row> {this.state.Newsfeed && this.state.Newsfeed.map((news, index) =>
                         <NewsFeedBox newsData={news} key={index} />
                     )}
+               
                     </Row>
                 </Container>
             </>

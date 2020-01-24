@@ -43,17 +43,12 @@ class Login extends Component {
         this.setState({
             error: false
         })
-        let usersToken = btoa(this.state.token.username + ":" + this.state.token.password)
-        let response = await fetch("https://striveschool.herokuapp.com/api/profile/me", {
-            method: "GET",
-            headers: {
-                "authorization" : "Basic " + usersToken
-            }
-        })
+        // let usersToken = btoa(this.state.token.username + ":" + this.state.token.password)
+        let response = await fetch(`http://localhost:7000/profiles/username/${this.state.token.username}`)
         if(response.ok){
             // this.props.history.push('/Profile')
             console.log("response ok")
-            this.props.handleLogin()
+            this.props.handleLogin(this.state.token.username,this.state.token.password)
         } else {
             this.setState({
                 error: true
