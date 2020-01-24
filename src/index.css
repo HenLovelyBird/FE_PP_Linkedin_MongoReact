@@ -203,6 +203,11 @@ code {
   margin-left: -189%;
 }
 
+.toast {
+  max-width: 100% !important
+}
+
+
 
 #bgphoto {
   margin: -11%;

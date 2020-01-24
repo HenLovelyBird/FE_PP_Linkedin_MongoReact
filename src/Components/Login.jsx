@@ -89,6 +89,12 @@ class Login extends Component {
           </div>
          );
     }
+
+    ///////////////////////////////////////////////////////////
+    //small form with sign up button//
+
+    
+
 }
  
 export default Login;

@@ -29,19 +29,19 @@ class NewsPictureModel extends Component {
         this.setState({isPost: true})
       }
 
-    setModalPicture = (event) => {
-      event.preventDefault();
+  //   setModalPicture = (event) => {
+  //     event.preventDefault();
 
-      if (this.state.modalOpenPicture === true) {
-          this.setState({
-              modalOpenPicture: false
-          })
-      } else if (this.state.modalOpenPicture === false) {
-          this.setState({
-              modalOpenPicture: true
-          })
-      }
-  }
+  //     if (this.state.modalOpenPicture === true) {
+  //         this.setState({
+  //             modalOpenPicture: false
+  //         })
+  //     } else if (this.state.modalOpenPicture === false) {
+  //         this.setState({
+  //             modalOpenPicture: true
+  //         })
+  //     }
+  // }
         render(){
             return this.state.isUpload === false? (
               <>
