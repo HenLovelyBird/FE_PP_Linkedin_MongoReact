@@ -81,22 +81,10 @@ componentDidMount= async ()=>{
         } 
       } 
 
-        comment: []
+  
         
-    }// we are doing this to make the delete work autonmatically withouy refreshing the page
-    delete = async()=>{
-        let username = "user21";
-        let password = "2ruxa4MRJdUgg6cz";
-        let token = btoa(username + ":" + password);
-        let response = await fetch("http://localhost:7000/posts/" + this.props.newsData._id,{
-              method: "DELETE",
-            
-          }) 
-          console.log(response)
-          this.setState({isDelete: true})
-          return response
-         
-    }
+   // we are doing this to make the delete work autonmatically withouy refreshing the page
+    
 
     // postComment = async()=>{
     //     get id of post
