@@ -105,8 +105,10 @@ class Profile extends React.Component {
     // let username = "user16";
     // let password = "c9WEUxMS294hN6fF";
     // let token = btoa(username + ":" + password);
+    //let user = localStorage.getItem('username')
+    let user =  "jeff"
     let response = await fetch(
-      "http://localhost:7000/profiles/5e27058cb3c3f78dc1741f9b",{
+      "http://localhost:7000/profiles/username/".concat(user),{
         method: "GET",
         // headers: {
         //   Authorization: "Basic " + token
