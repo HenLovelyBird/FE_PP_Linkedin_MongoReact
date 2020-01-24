@@ -43,19 +43,7 @@ class Newsfeed extends React.Component {
         }
     }
 
-    // setModalPicture = (event) => {
-    //     event.preventDefault();
 
-    //     if (this.state.modalOpenPicture === true) {
-    //         this.setState({
-    //             modalOpenPicture: false
-    //         })
-    //     } else if (this.state.modalOpenPicture === false) {
-    //         this.setState({
-    //             modalOpenPicture: true
-    //         })
-    //     }
-    // }
     componentDidMount = async () => {
 
          let username = "user21"
@@ -68,30 +56,16 @@ class Newsfeed extends React.Component {
             Newsfeed: news.posts.reverse()
 
        
-        let response = await fetch("http://localhost:7000/posts/")
-        console.log(response)
-        let news = await response.json()
-        console.log(news);
-        this.setState({
-            Newsfeed: news.posts
+    })
 
-        })
-    };
+    }
+
+
     render() {
-        console.log(this.state);
-        return (
-            <>
-                <Container flex id="newsfeed-toast">
-
-            
         
-           
-
-                
-
-
-
-                    <div className="p-4 bg-info my-4 fluid">
+        return (
+        
+                <Container flex id="newsfeed-toast" >
 
                     <div className="p-4 bg-info my-2 fluid">
 
@@ -119,9 +93,10 @@ class Newsfeed extends React.Component {
                
                     </Row>
                 </Container>
-            </>
+            
         );
     }
+
 }
 
 export default Newsfeed;
