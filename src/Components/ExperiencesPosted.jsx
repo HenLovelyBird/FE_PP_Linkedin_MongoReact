@@ -7,14 +7,8 @@ class ExperiencesPosted extends React.Component {
     }
 
     delete = async()=>{
-        let username = "user16";
-        let password = "c9WEUxMS294hN6fF";
-        let token = btoa(username + ":" + password);
-        let response = await fetch("https://striveschool.herokuapp.com/api/profile/user16/experiences/" + this.props.allExp._id,{
-              method: "DELETE",
-              headers: {
-                  "authorization" : "Basic " + token,
-              }
+        let response = await fetch("http://localhost:7000/experiences/profiles/:username/:userid" + this.props.allExp._id,{
+              method: "DELETE"
           }) 
           console.log(response)
           this.setState({isDeleted: true});

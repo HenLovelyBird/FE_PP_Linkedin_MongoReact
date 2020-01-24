@@ -43,20 +43,21 @@ class Newsfeed extends React.Component {
         }
     }
 
-    setModalPicture = (event) => {
-        event.preventDefault();
+    // setModalPicture = (event) => {
+    //     event.preventDefault();
 
-        if (this.state.modalOpenPicture === true) {
-            this.setState({
-                modalOpenPicture: false
-            })
-        } else if (this.state.modalOpenPicture === false) {
-            this.setState({
-                modalOpenPicture: true
-            })
-        }
-    }
+    //     if (this.state.modalOpenPicture === true) {
+    //         this.setState({
+    //             modalOpenPicture: false
+    //         })
+    //     } else if (this.state.modalOpenPicture === false) {
+    //         this.setState({
+    //             modalOpenPicture: true
+    //         })
+    //     }
+    // }
     componentDidMount = async () => {
+
          let username = "user21"
          let password = "2ruxa4MRJdUgg6cz"
          let token = btoa(username + ":" + password)
@@ -65,6 +66,15 @@ class Newsfeed extends React.Component {
         console.log(news);
         this.setState({
             Newsfeed: news.posts.reverse()
+
+       
+        let response = await fetch("http://localhost:7000/posts/")
+        console.log(response)
+        let news = await response.json()
+        console.log(news);
+        this.setState({
+            Newsfeed: news.posts
+
         })
     };
     render() {
@@ -72,6 +82,7 @@ class Newsfeed extends React.Component {
         return (
             <>
                 <Container flex id="newsfeed-toast">
+
             
         
            
@@ -81,23 +92,25 @@ class Newsfeed extends React.Component {
 
 
                     <div className="p-4 bg-info my-4 fluid">
+
+                    <div className="p-4 bg-info my-2 fluid">
+
                         <div>{this.state.modalOpen && <NewsModel
                             setmodal={this.setModal} open={this.state.modalOpen} />}
                         </div>
                         <div>{this.state.modalOpenPicture && <NewsPictureModel
                             setModalPicture={this.setModalPicture} open={this.state.modalOpenPicture} />}
                         </div>
-                        <Toast style={Toaststyle}>
+                        <Toast style={{maxWidth: '100%'}}>
                             <ToastHeader>
-                                Start a Post
+                                Click on the Pencil to Post Something!
                                 <div className="mx-5 float-right">
-                                    <FaPencilAlt size={25} style={pencil} onClick={this.setModal} />
-                                    <FaCameraRetro size={25} style={camera} onClick={this.setModalPicture} />
+                                    <FaPencilAlt size={15} style={pencil} style={{position: "float-right"}}onClick={this.setModal} />
                                 </div>
                             </ToastHeader>
-                            <ToastBody>
+                            {/* <ToastBody>
                                 Write a Text
-                         </ToastBody>
+                         </ToastBody> */}
                         </Toast>
                     </div>
                     <Row> {this.state.Newsfeed && this.state.Newsfeed.map((news, index) =>

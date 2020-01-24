@@ -39,9 +39,10 @@ class Profile extends React.Component {
           </div>
           <div className="col">
             <h2 id="profname">
-              {this.props.profile.name}
-              {this.props.profile.surname}
+              {this.props.profile.firstname} {this.props.profile.surname}
             </h2>
+            <h6 id="profarea">{this.props.profile.area} </h6>
+            <h6 id="proftitle">{this.props.profile.title} </h6>
           </div>
         </Row>
       </>

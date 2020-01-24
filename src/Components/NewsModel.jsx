@@ -27,17 +27,10 @@ class  NewsModel extends React.Component {
       text: this.state.text
     }
     if(this.state.text.length > 2){
-      let username = "user21";
-      let password = "2ruxa4MRJdUgg6cz";
-      let token = btoa(username + ":" + password);
       let response = await fetch(
-        "https://striveschool.herokuapp.com/api/posts/",{
+        "http://localhost:7000/posts/",{
           method: "POST",
           body: JSON.stringify(obj),
-          headers: {
-            "authorization": "Basic " + token,
-            "Content-Type": "application/json",
-          }
         }
       )
       console.log(response)

@@ -71,7 +71,7 @@ class Experience extends React.Component {
     let password = "c9WEUxMS294hN6fF";
     let token = btoa(username + ":" + password);
     let response = await fetch(
-      "http://localhost:7000/experiences/profile/heni",
+      "http://localhost:7000/profiles/admin1/experiences",
       {
         method: "GET",
         headers: {

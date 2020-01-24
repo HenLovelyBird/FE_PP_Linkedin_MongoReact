@@ -19,29 +19,29 @@ class NewsPictureModel extends Component {
     let username = "user21"
         let password = "2ruxa4MRJdUgg6cz"
         let token = btoa(username + ":" + password)
-        const url= "https://striveschool.herokuapp.com/api/posts/"
+        const url= "http://localhost:7000posts/"
         const body =new FormData();
         body.append('post',this.state.selectedFile)
         const request = new XMLHttpRequest();
         request.open("POST",url);
-        request.setRequestHeader( "Authorization", "Basic " + token )
+        // request.setRequestHeader( "Authorization", "Basic " + token )
         request.send(body)
         this.setState({isPost: true})
       }
 
-    setModalPicture = (event) => {
-      event.preventDefault();
+  //   setModalPicture = (event) => {
+  //     event.preventDefault();
 
-      if (this.state.modalOpenPicture === true) {
-          this.setState({
-              modalOpenPicture: false
-          })
-      } else if (this.state.modalOpenPicture === false) {
-          this.setState({
-              modalOpenPicture: true
-          })
-      }
-  }
+  //     if (this.state.modalOpenPicture === true) {
+  //         this.setState({
+  //             modalOpenPicture: false
+  //         })
+  //     } else if (this.state.modalOpenPicture === false) {
+  //         this.setState({
+  //             modalOpenPicture: true
+  //         })
+  //     }
+  // }
         render(){
             return this.state.isUpload === false? (
               <>
