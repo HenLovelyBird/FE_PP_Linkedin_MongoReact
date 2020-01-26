@@ -1,5 +1,5 @@
-import React, { Component, Row } from 'react';
-import { Toast, ToastBody, ToastHeader, Col } from 'reactstrap';
+import React from 'react';
+import { Toast, ToastBody, ToastHeader, Col, Container, Row, Input, Button } from 'reactstrap';
 import {  FaBars, FaThumbsUp, FaRegThumbsUp } from "react-icons/fa";
 
 
@@ -10,12 +10,12 @@ let Toaststyle ={
 }
 
 
-class NewsFeedBox extends Component {
+class NewsFeedBox extends React.Component {
     state= { 
         isDelete: false,
-
         liked: false,
-        count:0
+        count:0,
+        comment: {username: "admin"}
     };
 
 countUpdate=async()=>{
@@ -81,22 +81,56 @@ componentDidMount= async ()=>{
         } 
       } 
 
-  
         
-   // we are doing this to make the delete work autonmatically withouy refreshing the page
+    // we are doing this to make the delete work autonmatically withouy refreshing the page
+    delete = async()=>{
+        let username = "user21";
+        let password = "2ruxa4MRJdUgg6cz";
+        let token = btoa(username + ":" + password);
+        let response = await fetch("http://localhost:7000/posts/" + this.props.newsData._id,{
+              method: "DELETE"
+          }) 
+          console.log(response)
+          this.setState({isDelete: true})
+          return response
+         
+    }
+
+    submit = async ()=>{
+        if (this.state.comment._id) {
+            await fetch("http://localhost:7000/comments/:postId/:commentId" + this.props.postId, {
+                method: "PUT",
+                body: JSON.stringify(this.state.comment)
+            }).then(res => {
+                console.log("edit", res);
+                this.props.refresh();
+            });
+
+        } else {
+            await fetch("http://localhost:7000/comments/" + this.props.postId, {
+                method: "POST",
+                body: JSON.stringify(this.state.comment)
+            }).then(res => {
+                console.log("Your comment has been submitted", res);
+                this.props.refresh()
+            });
+        }
+        this.setState({_id: undefined});
+        this.toggle();
+    };
     
 
-    // postComment = async()=>{
-    //     get id of post
-    //     map
-    //     let response = await fetch("http://localhost:7000/comments/:postId/",{
-    //         method: "POST"
-    //     })
-    //     if (response )
-    //     console.log(response)
-    //     this.setState({postComment: true})
-    //     return response
-    // }
+//     postComment = async()=>{
+//         get id of post
+//         map
+//         let response = await fetch("http://localhost:7000/comments/:postId/",{
+//             method: "POST"
+//         })
+//         if (response )
+//         console.log(response)
+//         this.setState({postComment: true})
+//         return response
+//     }
 // get id of the post
 
     // uploadPucture=async()=> {
@@ -116,7 +150,7 @@ componentDidMount= async ()=>{
     //     this.props.modalOpen()
     // }
 
-    render() {
+    render(){
         
         console.log(this.props)
         return this.state.isDelete === false? ( 
@@ -131,7 +165,11 @@ componentDidMount= async ()=>{
                     </ToastBody>
                     <button style={{marginLeft: "5"}}onClick={this.delete}>Delete</button>
                     
-                    <Toast><ToastHeader><ToastBody>Comment: </ToastBody></ToastHeader></Toast>
+                    <Toast><ToastHeader><ToastBody>Comment:<Input type="textarea" 
+                    onChange={this.updateForm} 
+                    name="comment" 
+                    id="comment"></Input > <Button onClick={this.submit} type="submit"> submit</Button></ToastBody></ToastHeader></Toast>
+                
                 </Toast>
                 {
 

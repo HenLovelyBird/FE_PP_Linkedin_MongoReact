@@ -25,8 +25,6 @@ class Newsfeed extends React.Component {
         modalOpen: false,
         modalOpenPicture: false,
         dropdownOpen: false,
-        
-
     }
 
     setModal = (event) => {
@@ -43,30 +41,45 @@ class Newsfeed extends React.Component {
         }
     }
 
+    // setModalPicture = (event) => {
+    //     event.preventDefault();
 
+    //     if (this.state.modalOpenPicture === true) {
+    //         this.setState({
+    //             modalOpenPicture: false
+    //         })
+    //     } else if (this.state.modalOpenPicture === false) {
+    //         this.setState({
+    //             modalOpenPicture: true
+    //         })
+    //     }
+    // }
     componentDidMount = async () => {
 
          let username = "user21"
          let password = "2ruxa4MRJdUgg6cz"
          let token = btoa(username + ":" + password)
-        let response = await fetch("http://localhost:7000/posts/")
+        let response = await fetch("https://linkedinmockup.herokuapp.com/posts/")
         let news = await response.json()
         console.log(news);
         this.setState({
             Newsfeed: news.posts.reverse()
 
        
-    })
+        // let response = await fetch("http://localhost:7000/posts/")
+        // console.log(response)
+        // let news = await response.json()
+        // console.log(news);
+        // this.setState({
+        //     Newsfeed: news.posts
 
-    }
-
-
+        })
+    };
     render() {
-        
+        console.log(this.state);
         return (
-        
-                <Container flex id="newsfeed-toast" >
-
+            <>
+                <Container flex id="newsfeed-toast">
                     <div className="p-4 bg-info my-2 fluid">
 
                         <div>{this.state.modalOpen && <NewsModel
@@ -88,15 +101,14 @@ class Newsfeed extends React.Component {
                         </Toast>
                     </div>
                     <Row> {this.state.Newsfeed && this.state.Newsfeed.map((news, index) =>
-                        <NewsFeedBox newsData={news} key={index} />
+                        <NewsFeedBox newsData={news} key={index} postId={news._id}/>
                     )}
                
                     </Row>
                 </Container>
-            
+            </>
         );
     }
-
 }
 
 export default Newsfeed;
