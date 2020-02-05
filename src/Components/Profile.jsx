@@ -78,10 +78,10 @@ class Profile extends React.Component {
         </>);
 
   }
-    componentDidUpdate = async(prevProps, prevState) => {
-        // if this.state.profile.image 
-        // this.fetchingNewPic()
-    }
+    // componentDidUpdate = async(prevProps, prevState) => {
+    //     // if this.state.profile.image 
+    //     // this.fetchingNewPic()
+    // }
     
     // fetchingNewPic = async() => {
     //     let username = "user16";
@@ -105,8 +105,8 @@ class Profile extends React.Component {
     // let username = "user16";
     // let password = "c9WEUxMS294hN6fF";
     // let token = btoa(username + ":" + password);
-    //let user = localStorage.getItem('username')
-    let user =  "jeff"
+    let user = localStorage.getItem('username')
+    // let user =  "jeff"
     let response = await fetch(
       "http://localhost:7000/profiles/username/".concat(user),{
         method: "GET",

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Fade } from "reactstrap";
+import { Container, Row, Col,Fade } from "reactstrap";
 import Main from "./Main";
 import Login from "./Login";
 import NewLogin from "./NewLogin";
-import { connect } from "react-redux";
-import { loginWithThunk } from "../actions/user";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import {  connect } from "react-redux"
+import {loginWithThunk} from "../actions/user"
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 let divStyle = {
   position: "absolute",
@@ -19,21 +19,26 @@ let divStyle = {
   // height: "300px"
 };
 
+
+
 // const mapStateToProps = state => state
 // const mapDispatchToProps = dispatch => ({
 //   loadBooks: searchString => dispatch(loadWithThunk(searchString))
 // })
 
-const mapStateToProps = state => state;
 
-const mapDispatchToProps = dispatch => ({
-  handlelogin: (user, pass) => dispatch(loginWithThunk(user, pass))
-});
+const mapStateToProps = state => state
+
+const mapDispatchToProps = dispatch =>({
+
+  handlelogin: (user,pass) => dispatch(loginWithThunk(user,pass)) 
+
+})
 
 class App extends Component {
   state = {
-    isLoading: true,
-    signup: false
+     loggedIn: false,
+    signup: false,
     // currentuser: "",
     // currentpass: ""
   };
@@ -45,6 +50,24 @@ class App extends Component {
   };
 
 
+
+  // componentDidMount = async () => {
+  //   if (localStorage.getItem("username") && !localStorage.getItem("username")===undefined) {
+  //     const userNow = localStorage.getItem("username");
+
+  //     let response = await `http://localhost:7000/profiles/username/${userNow}`;
+
+  //     response
+  //       ? this.setState({
+  //           loggedIn: true,
+  //           currentuser: localStorage.getItem("username"),
+  //           currentpass: localStorage.getItem("password")
+  //         })
+  //       : this.setState({ loggedIn: false });
+  //   } else {
+  //     this.setState({ loggedIn: false });
+  //   }
+  // };
 
   updateState = () => {
     this.setState({
@@ -74,36 +97,28 @@ class App extends Component {
     localStorage.setItem("password", this.state.currentpass);
   };
 
-  // logout = () => {
-  //   this.setState({ loggedIn: false });
-  //   localStorage.clear();
-  //   // localStorage.setItem('username', undefined)
-  //   // localStorage.setItem('password', undefined)
-  // };
+
+  logout = () => {
+    this.setState({ loggedIn: false })
+    localStorage.clear()
+    // localStorage.setItem('username', undefined)
+    // localStorage.setItem('password', undefined)
+  }
+
 
   render() {
-    console.log(this.props);
-    return (
-      <>
-        <Router>
-          {this.props.utils.loggedIn ? (
-            this.state.isLoading ? (
-              <Fade>
-               
-                <div>
-                  <h4>Loading...</h4>
-                </div>
-              </Fade>
-            ) : (
-              <Switch>
-                <Container fluid className="px-0">
-                  {/* <Main logout={this.logout} /> */}
-                  <Main />
-                </Container>
-              </Switch>
-            )
-          ) : (
-            <Container>
+    console.log(this.props)
+
+    { return this.props.utils.loggedIn && this.state.loggedIn ?  (
+      <Fade> <Main logout={this.logout}/></Fade>
+     ) :
+
+   (
+      
+      <Router>
+        <Container fluid className="px-0">
+         (
+            <>
               <Row className="ml-0">
                 <Col>
                   <button
@@ -126,12 +141,14 @@ class App extends Component {
                   </button>
                 </Col>
               </Row>
-            </Container>
+              {!this.state.signup  && !this.props.utils.loggedIn  &&(
+            <Login  history={this.props.history} />
+            // <Login handleLogin={this.handleLogin} history={this.props.history} />
           )}
-
-          
-
-          {!this.props.utils.loggedIn && this.state.signup && (
+            </>
+          )
+  
+          {this.state.signup && (
             <div className="container col-7">
               <NewLogin
                 keepsignup={this.keepSignUP}
@@ -139,52 +156,30 @@ class App extends Component {
               />
             </div>
           )}
-          {!this.state.signup && (
-
-             !this.props.utils.loggedIn && (<Login history={this.props.history} />)
-            // <Login handleLogin={this.handleLogin} history={this.props.history} />
-          )
-          
-          
-          }
-        </Router>
-      </>
-    );
+         
+        </Container>
+      </Router>
+    )
   }
+}
 
-  // componentDidUpdate=(prevProps,prevState)=>{
-  //   if(prevState.isLoading)
-  //   this.setState({
-  //     isLoading: false
-  //   })
-  // }
-  // resetLoader =()=>{
-  //   this.setState({
-  //     isLoading: false
-  //   });
-  // }
 
- 
+  componentDidMount =  async () => {
+  
 
-  componentDidMount = async () => {
-    let savedUser = JSON.stringify(localStorage.getItem("username"));
-    let passnow = JSON.stringify(localStorage.getItem("password"));
-
-    if (savedUser && savedUser !== "undefined") {
-      await this.props.handlelogin(JSON.parse(savedUser, passnow));
+    let another = JSON.stringify(localStorage.getItem("username"))
+    let passnow = JSON.stringify(localStorage.getItem("password"))
+    
+    if ( another && another !== "undefined"){
+      await this.props.handlelogin(JSON.parse(another,passnow))
       this.setState({
         loggedIn: true
-      });
-      
-     
+      })
 
-      setTimeout(() => {
-        this.setState({
-          isLoading: false
-        });
-      }, 2000);
     }
 
+
+    
     // if (localStorage.getItem("username") && !localStorage.getItem("username")===undefined) {
     //   let user1 = Object.values(localStorage)[0]
     //    this.props.handlelogin(localStorage.getItem("username"), localStorage.getItem("password"))
@@ -199,7 +194,10 @@ class App extends Component {
     // } else {
     //   this.setState({ loggedIn: false });
     // }
-  };
+  
+  
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+}
+
+export default connect(mapStateToProps,mapDispatchToProps) (App);

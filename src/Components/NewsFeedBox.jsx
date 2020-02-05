@@ -28,6 +28,22 @@ countUpdate=async()=>{
             })
 
             
+           console.log(totalLikes)
+            
+           let likdByUser =  totalLikes.likes.reactions.find(x=> x.likedBy == "test 4")
+           
+           console.log("found me",likdByUser.likedBy)
+
+           likdByUser 
+           ? this.setState({
+            liked: true
+            })
+            : this.setState({
+                liked: false
+            })
+       
+         
+            
         }
     } catch (error) {
         console.log(error)
@@ -50,10 +66,10 @@ componentDidMount= async ()=>{
             })
             if(responce.ok){
                 const totalLikes = await responce.json()
-                this.setState({
+                this.setState(prevState=>({
                     
-                    liked:true
-                })
+                    liked: !prevState.liked
+                }))
                 await this.countUpdate()
             }
         } catch (error) {
@@ -69,10 +85,10 @@ componentDidMount= async ()=>{
             })
             if(responce.ok){
                 const totalLikes = await responce.json()
-                this.setState({
+                this.setState(prevState=>({
                     
-                    liked:false
-                })
+                    liked: !prevState.liked
+                }))
 
                 await this.countUpdate()
             }
@@ -152,7 +168,7 @@ componentDidMount= async ()=>{
 
     render(){
         
-        console.log(this.props)
+        // console.log(this.props)
         return this.state.isDelete === false? ( 
             <Col md="6">
                  <Toast style={Toaststyle} style={{marginTop: '20px'}}>
@@ -171,12 +187,21 @@ componentDidMount= async ()=>{
                     id="comment"></Input > <Button onClick={this.submit} type="submit"> submit</Button></ToastBody></ToastHeader></Toast>
                 
                 </Toast>
-                {
-
-                  this.state.liked===false ? <FaRegThumbsUp size={25} onClick={this.like}/> : <FaThumbsUp size={25} onClick={this.unlike}/>
-
-                }
-                {this.state.count<=1 ? <span>{this.state.count} like</span> : <span>{this.state.count} likes</span>}
+                <div>
+                    {
+    
+                    
+                          this.state.liked===false 
+                          ? <span>
+                              <FaRegThumbsUp  className="likeButtonStyle pr-2" size={25} onClick={this.like}/> </span>
+                          : <span><FaThumbsUp size={25} onClick={this.unlike} className="likeButtonStyle pr-2"/></span>
+        
+                    
+                    }
+               
+                        {this.state.count<=1 ? <span>{this.state.count} like </span>: <span>{this.state.count} likes </span>}
+                      
+                </div>
                 
             </Col>
 

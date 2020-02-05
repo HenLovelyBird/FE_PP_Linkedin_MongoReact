@@ -2,6 +2,20 @@ import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, Row, Col } from 'reactstrap';
 import ErrorMessage from './Alerts/ErrorMessage'
 
+import {  connect } from "react-redux"
+import {loginWithThunk} from "../actions/user"
+
+
+
+
+const mapStateToProps = state => state
+
+const mapDispatchToProps = dispatch =>({
+
+  handlelogin: (user,pass) => dispatch(loginWithThunk(user,pass)) 
+
+})
+
 let divStyle ={
     position: "absolute",
     top: "28%",
@@ -56,11 +70,11 @@ class Login extends Component {
         }
     }
     render() { 
-        console.log(this.state.token.username)
+        console.log(this.props.handlelogin)
         return ( 
             <div style={divStyle}>
             <Form inline>
-                <Row className="mb-2">
+                <Row className="mb-2"> 
                     <Col md="4">
                         <Label style={labelStyle}>Login</Label>
                     </Col>
@@ -78,9 +92,12 @@ class Login extends Component {
                 </Row>
           </Form>
           <div style={{marginLeft: "150px", marginTop: "40px"}}>
-          <Button style={btnStyle} onClick={this.login}>Submit</Button>
+          <Button style={btnStyle} onClick={()=>this.props.handlelogin(this.state.token.username,this.state.token.password)}>Submit</Button>
           </div>
-          {this.state.error && <ErrorMessage style={{height: "70px", fontSize: "12px"}} />}
+          {!this.props.utils.loggedIn && <ErrorMessage style={{height: "70px", fontSize: "12px"}} />}
+           {/* {this.props.utils.loggedIn && <ErrorMessage style={{height: "70px", fontSize: "12px"}} />}  */}
+
+
           </div>
          );
     }
@@ -92,4 +109,4 @@ class Login extends Component {
 
 }
  
-export default Login;
+export default connect(mapStateToProps,mapDispatchToProps)(Login);

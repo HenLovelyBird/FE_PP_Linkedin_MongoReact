@@ -11,19 +11,19 @@ class Main extends React.Component {
 
    
     render() {
-        return (
-            <Router>
+        return (<>
+            
             <Navigation logout={this.props.logout}/>
             
             <Container className="parentcontainer">
-                <Switch>
+              
                     <Route path="/Profile" exact component={Profile} />
                     <Route path="/currentUserPage:userId" component={CurrentUserPage} />
-                    <Route path="/Newsfeed" component={Newsfeed}/>
-                </Switch>
+                    <Route path="/" component={Newsfeed}/>
+             
             </Container>   
-        </Router>
-        );
+       
+        </>);
     }
 }
 
