@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, Row, Col } from 'reactstrap';
 import ErrorMessage from './Alerts/ErrorMessage'
-
+import LoginTranslator from './LoginTranslator'
 import {  connect } from "react-redux"
 import {loginWithThunk} from "../actions/user"
-
 
 
 
@@ -44,9 +43,11 @@ class Login extends Component {
     state = { 
         token: {
             username: '',
-            password: ''
+            password: '',
+            
         },
-        error: false
+        error: false,
+        // translation: false
     }
 
     handleChange = (ev) => {
@@ -69,12 +70,18 @@ class Login extends Component {
             })
         }
     }
-    render() { 
-        console.log(this.props.handlelogin)
+
+    // handleTranslation = (e) => {
+    //    this.state.translation = e.target.value
+    // }
+    
+    render () {
         return ( 
             <div style={divStyle}>
             <Form inline>
                 <Row className="mb-2"> 
+                    <LoginTranslator />
+                    {/* onChange={this.handleTranslation} */}
                     <Col md="4">
                         <Label style={labelStyle}>Login</Label>
                     </Col>
@@ -100,6 +107,8 @@ class Login extends Component {
 
           </div>
          );
+
+         
     }
 
     ///////////////////////////////////////////////////////////

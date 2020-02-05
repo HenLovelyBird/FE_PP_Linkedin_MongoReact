@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { loginWithThunk } from "../actions/user";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 
+
 let divStyle = {
   position: "absolute",
   top: "28%",
