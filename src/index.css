@@ -325,5 +325,7 @@ code {
 
 /* like button */
 .likeButtonStyle:hover{
-  transform: scale(1.17)
+  transform: scale(1.17);
+  cursor: pointer;
+  
 }

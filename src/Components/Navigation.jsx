@@ -7,7 +7,29 @@ import { faBriefcase, faSearch, faHome, faUsers, faComments, faBell, faTh } from
 import '../index.css'
 import ProfilesDropDown from './ProfilesDropDown';
 
+import {  connect } from "react-redux"
+import {logoutWithThunk} from "../actions/logout"
 
+
+
+
+const mapStateToProps = state => state
+
+const mapDispatchToProps = dispatch =>({
+
+  handlelogout: () => dispatch(logoutWithThunk()) 
+
+})
+
+// const mapDispatchToProps = dispatch =>({
+
+//    handlelogin: () => 
+//   dispatch({
+//     type: "TURNOFF_LOGGEDIN"
+//   })
+ 
+  
+//  })
 
 class Navigation extends React.Component {
    state = {
@@ -142,7 +164,9 @@ class Navigation extends React.Component {
                <NavItem>
                   <div className="nav-item-div">
                      <FontAwesomeIcon className="nav-icon" icon={faHome}/>
-                     <NavLink onClick={this.props.logout}>Logout</NavLink>
+                     <NavLink onClick={()=>this.props.handlelogout()}>Logout</NavLink>
+                     
+                     {/* <NavLink onClick={this.props.logout}>Logout</NavLink> */}
                   </div>
                </NavItem>
                </Collapse>
@@ -152,4 +176,4 @@ class Navigation extends React.Component {
    }
 }
 
-export default Navigation;
+export default connect(mapStateToProps,mapDispatchToProps) (Navigation);

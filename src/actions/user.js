@@ -1,10 +1,24 @@
 export const loginWithThunk = (username, password) => {
   return async (dispatch, getState) => {
-    const response = await `http://localhost:7000/profiles/username/${username}`;
+    const response = await fetch(`http://localhost:7000/profiles/username/${username}`);
 
     const json = await response.json();
 
-    if (json.ok) {
+console.log(getState())
+    // if(logout) {
+    //     dispatch({
+    //       type: "RESET_LOGIN"
+    //     });
+  
+    //     dispatch({
+    //       type: "TURNOFF_LOGGEDIN"
+    //     });
+  
+    //     localStorage.clear();
+    //   } 
+
+    
+    if (username && response.ok) {
       dispatch({
         type: "SET_LOGIN",
         payload: {
@@ -31,6 +45,7 @@ export const loginWithThunk = (username, password) => {
       localStorage.clear();
     }
 
+  
     //     if (response.ok){
     //       ? this.setState({
     //           loggedIn: true,

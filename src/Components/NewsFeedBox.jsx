@@ -66,10 +66,10 @@ componentDidMount= async ()=>{
             })
             if(responce.ok){
                 const totalLikes = await responce.json()
-                this.setState({
+                this.setState(prevState=>({
                     
-                    liked:true
-                })
+                    liked: !prevState.liked
+                }))
                 await this.countUpdate()
             }
         } catch (error) {
@@ -85,10 +85,10 @@ componentDidMount= async ()=>{
             })
             if(responce.ok){
                 const totalLikes = await responce.json()
-                this.setState({
+                this.setState(prevState=>({
                     
-                    liked:false
-                })
+                    liked: !prevState.liked
+                }))
 
                 await this.countUpdate()
             }
