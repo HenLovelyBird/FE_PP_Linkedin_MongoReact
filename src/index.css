@@ -320,3 +320,10 @@ code {
   margin-left: 2%!important;
   background-color: rgb(44, 121, 145);
 }
+
+
+
+/* like button */
+.likeButtonStyle:hover{
+  transform: scale(1.17)
+}

@@ -3,25 +3,43 @@ import { Container, Row, Col } from "reactstrap";
 import Main from "./Main";
 import Login from "./Login";
 import NewLogin from "./NewLogin";
+import {  connect } from "react-redux"
+import {loginWithThunk} from "../actions/user"
 
 let divStyle = {
   position: "absolute",
   top: "28%",
   left: "32%"
   // border: "0.5px solid gray",
+  // width: "500px",
   // boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   // backgroundColor: "white",
   // padding: "50px",
-  // width: "500px",
   // height: "300px"
 };
 
+
+
+// const mapStateToProps = state => state
+// const mapDispatchToProps = dispatch => ({
+//   loadBooks: searchString => dispatch(loadWithThunk(searchString))
+// })
+
+
+const mapStateToProps = state => state
+
+const mapDispatchToProps = dispatch =>({
+
+  handlelogin: (user,pass) => dispatch(loginWithThunk(user,pass)) 
+
+})
+
 class App extends Component {
   state = {
-    loggedIn: false,
+    // loggedIn: false,
     signup: false,
-    currentuser: "",
-    currentpass: ""
+    // currentuser: "",
+    // currentpass: ""
   };
 
   keepSignUP = () => {
@@ -30,8 +48,10 @@ class App extends Component {
     });
   };
 
+  
+
   componentDidMount = async () => {
-    if (localStorage.getItem("username")) {
+    if (localStorage.getItem("username") && !localStorage.getItem("username")===undefined  ) {
       const userNow = localStorage.getItem("username");
 
       let response = await `http://localhost:7000/profiles/username/${userNow}`;
@@ -79,12 +99,14 @@ class App extends Component {
 
   logout = () => {
     this.setState({ loggedIn: false })
-    localStorage.setItem('username', undefined)
-    localStorage.setItem('password', undefined)
+    localStorage.clear()
+    // localStorage.setItem('username', undefined)
+    // localStorage.setItem('password', undefined)
   }
 
 
   render() {
+    console.log(this.props)
     return (
       <Container fluid className="px-0">
         {this.state.loggedIn ? (
@@ -132,4 +154,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(mapStateToProps,mapDispatchToProps) (App);

@@ -60,7 +60,7 @@ class Login extends Component {
         return ( 
             <div style={divStyle}>
             <Form inline>
-                <Row className="mb-2">
+                <Row className="mb-2"> 
                     <Col md="4">
                         <Label style={labelStyle}>Login</Label>
                     </Col>

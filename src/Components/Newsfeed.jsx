@@ -51,7 +51,7 @@ class Newsfeed extends React.Component {
          let token = btoa(username + ":" + password)
         let response = await fetch("http://localhost:7000/posts/")
         let news = await response.json()
-        console.log(news);
+        // console.log(news);
         this.setState({
             Newsfeed: news.posts.reverse()
 
