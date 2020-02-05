@@ -7,6 +7,7 @@ import App from './Components/App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from "react-redux"
 import configureStore from "./store"
+import trans from "./translation"
 
 ReactDOM.render(
   <Provider store={configureStore()}>
