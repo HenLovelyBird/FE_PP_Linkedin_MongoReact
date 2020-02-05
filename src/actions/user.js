@@ -18,7 +18,7 @@ console.log(getState())
     //   } 
 
     
-    if (username && response.ok) {
+    if (username && json) {
       dispatch({
         type: "SET_LOGIN",
         payload: {

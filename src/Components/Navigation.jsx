@@ -163,8 +163,8 @@ class Navigation extends React.Component {
                </NavItem>
                <NavItem>
                   <div className="nav-item-div">
-                     <FontAwesomeIcon className="nav-icon" icon={faHome}/>
-                     <NavLink onClick={()=>this.props.handlelogout()}>Logout</NavLink>
+                     
+                     <NavLink onClick={()=>this.props.handlelogout()} ><FontAwesomeIcon className="nav-icon" icon={faHome}/>Logout</NavLink>
                      
                      {/* <NavLink onClick={this.props.logout}>Logout</NavLink> */}
                   </div>

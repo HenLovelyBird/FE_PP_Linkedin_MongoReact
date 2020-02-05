@@ -95,7 +95,9 @@ class Login extends Component {
           <Button style={btnStyle} onClick={()=>this.props.handlelogin(this.state.token.username,this.state.token.password)}>Submit</Button>
           </div>
           {!this.props.utils.loggedIn && <ErrorMessage style={{height: "70px", fontSize: "12px"}} />}
-          {/* {!this.props.utils.loggedIn && <ErrorMessage style={{height: "70px", fontSize: "12px"}} />} */}
+           {/* {this.props.utils.loggedIn && <ErrorMessage style={{height: "70px", fontSize: "12px"}} />}  */}
+
+
           </div>
          );
     }

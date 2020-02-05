@@ -74,12 +74,12 @@ class App extends Component {
     localStorage.setItem("password", this.state.currentpass);
   };
 
-  logout = () => {
-    this.setState({ loggedIn: false });
-    localStorage.clear();
-    // localStorage.setItem('username', undefined)
-    // localStorage.setItem('password', undefined)
-  };
+  // logout = () => {
+  //   this.setState({ loggedIn: false });
+  //   localStorage.clear();
+  //   // localStorage.setItem('username', undefined)
+  //   // localStorage.setItem('password', undefined)
+  // };
 
   render() {
     console.log(this.props);
@@ -97,7 +97,8 @@ class App extends Component {
             ) : (
               <Switch>
                 <Container fluid className="px-0">
-                  <Main logout={this.logout} />
+                  {/* <Main logout={this.logout} /> */}
+                  <Main />
                 </Container>
               </Switch>
             )
@@ -128,7 +129,9 @@ class App extends Component {
             </Container>
           )}
 
-          {this.state.signup && (
+          
+
+          {!this.props.utils.loggedIn && this.state.signup && (
             <div className="container col-7">
               <NewLogin
                 keepsignup={this.keepSignUP}
@@ -136,23 +139,44 @@ class App extends Component {
               />
             </div>
           )}
-          {!this.props.utils.loggedIn && (
-            <Login history={this.props.history} />
+          {!this.state.signup && (
+
+             !this.props.utils.loggedIn && (<Login history={this.props.history} />)
             // <Login handleLogin={this.handleLogin} history={this.props.history} />
-          )}
+          )
+          
+          
+          }
         </Router>
       </>
     );
   }
+
+  // componentDidUpdate=(prevProps,prevState)=>{
+  //   if(prevState.isLoading)
+  //   this.setState({
+  //     isLoading: false
+  //   })
+  // }
+  // resetLoader =()=>{
+  //   this.setState({
+  //     isLoading: false
+  //   });
+  // }
+
+ 
+
   componentDidMount = async () => {
-    let another = JSON.stringify(localStorage.getItem("username"));
+    let savedUser = JSON.stringify(localStorage.getItem("username"));
     let passnow = JSON.stringify(localStorage.getItem("password"));
 
-    if (another && another !== "undefined") {
-      await this.props.handlelogin(JSON.parse(another, passnow));
+    if (savedUser && savedUser !== "undefined") {
+      await this.props.handlelogin(JSON.parse(savedUser, passnow));
       this.setState({
         loggedIn: true
       });
+      
+     
 
       setTimeout(() => {
         this.setState({
