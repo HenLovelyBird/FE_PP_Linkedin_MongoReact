@@ -28,18 +28,6 @@ function LoginTranslator() {
     
 }
 
-                    {/* // onClick={() => i18n.languages === "en", "de", "ru", "it" ? i18n.changeLanguage(i18n.languages) 
-                        // : i18n.changeLanguage("en") }> 
-
-                        // onClick={() => i18n.languages("en", "de", "ru", "it")}>
-                        // Language Options </Button>
-                        
-                        // onClick={() => i18n.language("en")}>en</Button>
-
-                        // <Button color="info" 
-                        // size="sm" 
-                        // style={{marginBottom: "2em", color: "black"}}
-                        // onClick={() => i18n.language("de")}>de</Button>
-                        // </Col> */}
+                    
                         
 export default LoginTranslator;

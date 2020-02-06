@@ -70,15 +70,12 @@ class Login extends Component {
         }
     }
 
-   
-    
     render () {
         return ( 
             <div style={divStyle}>
             <Form inline>
                 <Row className="mb-2"> 
                     <LoginTranslator />
-                    {/* Or {this.handleTranslation} */}
                     <Col md="4">
                         <Label style={labelStyle}>Login</Label>
                     </Col>
