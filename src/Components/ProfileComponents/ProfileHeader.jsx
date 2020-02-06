@@ -4,6 +4,7 @@ import ProfileNav from "./ProfileNav";
 import { Row } from "reactstrap";
 import ModalPicture from './ModalPicture'
 
+
 class Profile extends React.Component {
   state = { 
     modalOpen: false

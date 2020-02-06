@@ -46,8 +46,7 @@ class Login extends Component {
             password: '',
             
         },
-        error: false,
-        translation: false
+        error: false
     }
 
     handleChange = (ev) => {
@@ -71,18 +70,14 @@ class Login extends Component {
         }
     }
 
-    handleTranslation = e => {
-       this.setState({
-        translation: e.target.value
-        });
-    }
+   
     
     render () {
         return ( 
             <div style={divStyle}>
             <Form inline>
                 <Row className="mb-2"> 
-                    <LoginTranslator onChange={e => this.setState({translation: e.target.value})}/>
+                    <LoginTranslator />
                     {/* Or {this.handleTranslation} */}
                     <Col md="4">
                         <Label style={labelStyle}>Login</Label>
