@@ -1,7 +1,12 @@
 import React from 'react';
 import { Toast, ToastBody, ToastHeader, Col, Container, Row, Input, Button } from 'reactstrap';
 import {  FaBars, FaThumbsUp, FaRegThumbsUp } from "react-icons/fa";
+import { connect } from "react-redux";
 
+const mapStateToProps = state => state
+const mapDispatchToProps = dispatch => ({
+    comment: () => dispatch({ type: "LOAD_COMMENTS"}),
+}); 
 
 
 let Toaststyle ={
@@ -15,7 +20,7 @@ class NewsFeedBox extends React.Component {
         isDelete: false,
         liked: false,
         count:0,
-        comment: {username: "admin"}
+        // comment: {username: "admin"}
     };
 
 countUpdate=async()=>{
@@ -116,18 +121,20 @@ componentDidMount= async ()=>{
         if (this.state.comment._id) {
             await fetch("http://localhost:7000/comments/:postId/:commentId" + this.props.postId, {
                 method: "PUT",
-                body: JSON.stringify(this.state.comment)
+                body: JSON.stringify(this.comment)
             }).then(res => {
                 console.log("edit", res);
+                comment: this.props.comment()
                 this.props.refresh();
             });
 
         } else {
             await fetch("http://localhost:7000/comments/" + this.props.postId, {
                 method: "POST",
-                body: JSON.stringify(this.state.comment)
+                body: JSON.stringify(this.comment)
             }).then(res => {
                 console.log("Your comment has been submitted", res);
+                comment: this.props.comment()
                 this.props.refresh()
             });
         }
@@ -231,4 +238,4 @@ componentDidMount= async ()=>{
     }
 }
 
-export default NewsFeedBox;
+export default connect(mapStateToProps, mapDispatchToProps)(NewsFeedBox);
